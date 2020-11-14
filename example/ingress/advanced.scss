@@ -1,0 +1,15 @@
+
+@use './use' as use;
+
+.myClass {
+  @include use.useMe(25px);
+  margin: 2px;
+
+  &:hover {
+    margin: 4px;
+  }
+
+  .nestedClass {
+    color: blue;
+  }
+}
