@@ -5,16 +5,12 @@
 
 ## $IMAGE_NAME var is injected into the build so the tag is correct.
 echo "[***] Build hook starting..."
-
-# $(echo "index.docker.io/user/respository" | cut -d '/' -f 3) = "repository"
-APPLICATION=$(echo "${DOCKER_REPO}" | cut -d '/' -f 3)
-
-echo "[---] DOCKERFILE_PATH: ${DOCKERFILE_PATH}"
-echo "[---] DOCKER_REPO: ${DOCKER_REPO}"
-echo "[---] IMAGE_NAME: ${IMAGE_NAME}"
-echo "[---] APPLICATION: ${APPLICATION}"
-
 GITHUB_USERREPO="Herbaltea-GG/DSaaS"
+DOCKER_REPO="https://hub.docker.com/r/herbaltea/dsaas"
+APPLICATION="DSaaS"
+
+echo "[---] DOCKER_REPO: ${DOCKER_REPO}"
+echo "[---] APPLICATION: ${APPLICATION}"
 
 # Set description from github
 DESCRIPTION=$(curl -s https://api.github.com/repos/${GITHUB_USERREPO} \
@@ -26,13 +22,12 @@ echo "[---] GITHUB_USERREPO: ${GITHUB_USERREPO}"
 echo "[---] DESCRIPTION: ${DESCRIPTION}"
 
 docker build \
-        --file "${DOCKERFILE_PATH}" \
         --build-arg APPLICATION=${APPLICATION} \
         --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
         --build-arg REVISION=$(git rev-parse --short HEAD) \
-    	  --build-arg PACKAGE="${GITHUB_USERREPO}" \
+    	--build-arg PACKAGE="${GITHUB_USERREPO}" \
         --build-arg DESCRIPTION="${DESCRIPTION}" \
-        --build-arg VERSION=$(git describe --tags --always) \
-        --build-arg BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        --build-arg VERSION="1.0.0" \
+        --build-arg BRANCH=$(git rev-parse --abbrev-ref HEAD) \
         -t herbaltea/dsaas:latest \
         .
