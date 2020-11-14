@@ -17,8 +17,9 @@ More specific locations is cool too
 docker run --rm -v <Path to Sass>:/sass/ingress -v <Path to Output>:/sass/compiled herbaltea/dsaas:latest
 ```
 
-### Thanks To:
+### Thanks To
 > @michalklempa - (https://github.com/michalklempa/docker-dart-sass)
+  
 > @jnovack - (https://github.com/jnovack/docker-multi-arch-hooks)
 
 I referenced these repos heavily for guidance as was able to use the build hooks which saved an immense amount of time.
