@@ -34,5 +34,5 @@ docker build \
         --build-arg DESCRIPTION="${DESCRIPTION}" \
         --build-arg VERSION=$(git describe --tags --always) \
         --build-arg BRANCH=$(git rev-parse --abbrev-ref HEAD)
-        -t herbaltea/DSaaS:latest \
+        -t herbaltea/dsaas:latest \
         .
