@@ -9,6 +9,8 @@ ARG VERSION
 ARG BRANCH
 ARG RELEASE=1.29.0
 
+ARG dart_flags=
+
 ADD https://github.com/sass/dart-sass/releases/download/${RELEASE}/dart-sass-${RELEASE}-linux-x64.tar.gz /opt/
 
 RUN tar -C /opt/ -xzvf /opt/dart-sass-${RELEASE}-linux-x64.tar.gz
@@ -28,4 +30,5 @@ LABEL maintainer="adam@quitenice.ca" \
       org.label-schema.vcs-branch=$BRANCH \
       org.label-schema.vcs-ref=$REVISION
 
-CMD [ "/opt/dart-sass/sass", "/sass/ingress:/sass/compiled" ]
+
+CMD /opt/dart-sass/sass $dart_flags /sass/ingress:/sass/compiled
