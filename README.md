@@ -1,5 +1,5 @@
 # Dart-Sass as a Service (DSaaS)
-Dart-Sass as a service. Runs a vm that quickly ingests/compiles scss and then disappears.
+Dart-Sass as a service. Runs a container that quickly ingests/compiles scss and then disappears.
   
 I'm not joking when I say I made this just to use `@use`
 
