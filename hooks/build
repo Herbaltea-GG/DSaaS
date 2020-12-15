@@ -38,6 +38,9 @@ docker build \
         -t herbaltea/dsaas:latest \
         .
 
+docker tag herbaltea/dsaas:latest herbaltea/dsaas:latest
+docker push herbaltea/dsaas:latest
+
 # Built most recent tag
 docker build \
         --build-arg APPLICATION=${APPLICATION} \
@@ -51,6 +54,8 @@ docker build \
         -t herbaltea/dsaas:$LATEST_TAG \
         .
 
+docker tag herbaltea/dsaas:$LATEST_TAG herbaltea/dsaas:$LATEST_TAG
+docker push herbaltea/dsaas:$LATEST_TAG
 
 
 echo "[***] Build hook completed."
