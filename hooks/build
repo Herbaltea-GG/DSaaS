@@ -9,6 +9,7 @@ echo "[***] Build hook starting..."
 # APPLICATION="DSaaS"
 
 LATEST_TAG=$(git describe --tags --always)
+TRIMMED_TAG=$(git describe --tags --always | awk -F '-' '{print $1}')
 SASS_RELEASE=$(curl -s https://api.github.com/repos/sass/dart-sass/tags | grep -A0 -m 1 '"name":' | awk '/name/{print substr($2,2,length($2)-3)}')
 
 
@@ -51,11 +52,11 @@ docker build \
         --build-arg VERSION="${LATEST_TAG}" \
         --build-arg BRANCH=$(git rev-parse --abbrev-ref HEAD) \
         --build-arg RELEASE="${SASS_RELEASE}" \
-        -t herbaltea/dsaas:$LATEST_TAG \
+        -t herbaltea/dsaas:$TRIMMED_TAG \
         .
 
-docker tag herbaltea/dsaas:$LATEST_TAG herbaltea/dsaas:$LATEST_TAG
-docker push herbaltea/dsaas:$LATEST_TAG
+docker tag herbaltea/dsaas:$TRIMMED_TAG herbaltea/dsaas:$TRIMMED_TAG
+docker push herbaltea/dsaas:$TRIMMED_TAG
 
 
 echo "[***] Build hook completed."
